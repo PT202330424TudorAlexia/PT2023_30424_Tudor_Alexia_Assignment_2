@@ -13,25 +13,21 @@ public class Scheduler {
     private Strategy strategy;
 
 
-    public Scheduler(int maxNoServers, int maxTasksPerServer) {
+    public Scheduler(int maxNoServers, int maxTasksPerServer, int numberOfClients) {
         this.maxNoServers = maxNoServers;
         this.maxTasksPerServer = maxTasksPerServer;
         this.servers = new ArrayList<Server>();
-        //for maxNoServers
         for (int i = 0; i < maxNoServers; i++) {
-            //create server object
-            Server server = new Server();
-            //create thread with the object
+            Server server = new Server(numberOfClients);
             Thread thread = new Thread(server);
             servers.add(server);
             thread.start();
 
         }
+
     }
 
     public void changeStrategy(SelectionPolicy selectionPolicy) {
-//apply strategy patter to instantiate the strategy with the concrete
-        //strategy corresponding to policy
         if (selectionPolicy == SelectionPolicy.SHORTEST_QUEUE) {
             strategy = new ConcreteStrategyQueue();
         }
@@ -41,8 +37,6 @@ public class Scheduler {
     }
 
     public void dispatchTask(Task task) {
-//call the strategy addTask method
-     //   if (strategy != null)
             strategy.addTask(servers, task);
     }
 

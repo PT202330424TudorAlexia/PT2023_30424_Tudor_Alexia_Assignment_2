@@ -1,0 +1,110 @@
+Time: 0
+Waiting clients: (9, 2, 5),(7, 3, 7),(10, 3, 3),(11, 3, 5),(13, 3, 2),(8, 4, 4),(12, 4, 6),
+Queue 0: closed
+Queue 1: closed
+Queue 2: closed
+
+Time: 1
+Waiting clients: (9, 2, 5),(7, 3, 7),(10, 3, 3),(11, 3, 5),(13, 3, 2),(8, 4, 4),(12, 4, 6),
+Queue 0: closed
+Queue 1: closed
+Queue 2: closed
+
+Time: 2
+Waiting clients: (9, 2, 5),(7, 3, 7),(10, 3, 3),(11, 3, 5),(13, 3, 2),(8, 4, 4),(12, 4, 6),
+Queue 0: closed
+Queue 1: closed
+Queue 2: closed
+
+Time: 3
+Waiting clients: (7, 3, 7),(10, 3, 3),(11, 3, 5),(13, 3, 2),(8, 4, 4),(12, 4, 6),
+Queue 0: (9, 2, 5),
+Queue 1: closed
+Queue 2: closed
+
+Time: 4
+Waiting clients: (8, 4, 4),(12, 4, 6),
+Queue 0: (9, 2, 4),(13, 3, 2),
+Queue 1: (7, 3, 7),
+Queue 2: (10, 3, 3),(11, 3, 5),
+
+Time: 5
+Waiting clients: 
+Queue 0: (9, 2, 3),(13, 3, 2),(8, 4, 4),
+Queue 1: (7, 3, 6),(12, 4, 6),
+Queue 2: (10, 3, 2),(11, 3, 5),
+
+Time: 6
+Waiting clients: 
+Queue 0: (9, 2, 2),(13, 3, 2),(8, 4, 4),
+Queue 1: (7, 3, 5),(12, 4, 6),
+Queue 2: (10, 3, 1),(11, 3, 5),
+
+Time: 7
+Waiting clients: 
+Queue 0: (9, 2, 1),(13, 3, 2),(8, 4, 4),
+Queue 1: (7, 3, 4),(12, 4, 6),
+Queue 2: (11, 3, 5),
+
+Time: 8
+Waiting clients: 
+Queue 0: (13, 3, 2),(8, 4, 4),
+Queue 1: (7, 3, 3),(12, 4, 6),
+Queue 2: (11, 3, 4),
+
+Time: 9
+Waiting clients: 
+Queue 0: (13, 3, 1),(8, 4, 4),
+Queue 1: (7, 3, 2),(12, 4, 6),
+Queue 2: (11, 3, 3),
+
+Time: 10
+Waiting clients: 
+Queue 0: (8, 4, 4),
+Queue 1: (7, 3, 1),(12, 4, 6),
+Queue 2: (11, 3, 2),
+
+Time: 11
+Waiting clients: 
+Queue 0: (8, 4, 3),
+Queue 1: (12, 4, 6),
+Queue 2: (11, 3, 1),
+
+Time: 12
+Waiting clients: 
+Queue 0: (8, 4, 2),
+Queue 1: (12, 4, 5),
+Queue 2: closed
+
+Time: 13
+Waiting clients: 
+Queue 0: (8, 4, 1),
+Queue 1: (12, 4, 4),
+Queue 2: closed
+
+Time: 14
+Waiting clients: 
+Queue 0: closed
+Queue 1: (12, 4, 3),
+Queue 2: closed
+
+Time: 15
+Waiting clients: 
+Queue 0: closed
+Queue 1: (12, 4, 2),
+Queue 2: closed
+
+Time: 16
+Waiting clients: 
+Queue 0: closed
+Queue 1: (12, 4, 1),
+Queue 2: closed
+
+Time: 17
+Waiting clients: 
+Queue 0: closed
+Queue 1: closed
+Queue 2: closed
+
+Average service time: 7.142857
+Peak hour: 5 with 3 clients

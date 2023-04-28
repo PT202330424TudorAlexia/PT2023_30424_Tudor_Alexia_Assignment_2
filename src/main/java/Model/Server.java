@@ -3,6 +3,10 @@ package Model;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.concurrent.ArrayBlockingQueue;
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.SynchronousQueue;
 import java.util.concurrent.atomic.AtomicInteger;
@@ -11,67 +15,59 @@ public class Server implements Runnable {
     private BlockingQueue<Task> tasks;
     private AtomicInteger waitingPeriod;
     private AtomicInteger nrClients;
+    private boolean finish=false;
 
-    public Server() {
-        this.tasks = new SynchronousQueue<>();
-        this.waitingPeriod = new AtomicInteger();
+    public Server(int numberOfClients) {
+        this.tasks = new ArrayBlockingQueue<>(numberOfClients);
+        this.waitingPeriod = new AtomicInteger(0);
         this.nrClients = new AtomicInteger();
     }
 
 
     public void addTask(Task newTask) {
-        //add task to queue
-        if (tasks.offer(newTask)) {
-            //increment the waiting period
             waitingPeriod.addAndGet(newTask.getServiceTime());
             nrClients.getAndIncrement();
-        }
+            tasks.add(newTask);
     }
 
 
     @Override
     public void run() {
         while (true) {
-//take next task from queue
+            Task task = tasks.peek();
 
-            //Task[] taskArray= getTasks();
-            Task task = getNextTask(tasks);
-            if (task == null) {
-                continue;
-            } else
+            if (task != null) {
 
-                // stop the thread for a time equal with the task's processing time
                 try {
                     Thread.sleep(task.getServiceTime());
+
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
-            // decrement the waitingPeriod
-            waitingPeriod.getAndAdd(-task.getServiceTime());
 
+                if(task.getServiceTime()==0){
+                tasks.remove();
+                waitingPeriod.getAndAdd(-task.getServiceTime());
+
+                }
+            }
         }
     }
 
-    public void writeInFile(int time,int ){
-        String file="log.txt";
-
-        try{
-            FileWriter writeinfile=new FileWriter(new File(file));
-            writeinfile.write("Time");
-        }catch (IOException e){
-
-        }
-
-    }
-
-    public Task getNextTask(BlockingQueue<Task> tasks) {
-        Task t = tasks.poll();
+    public Task getNextTask() {
+        Task t = tasks.peek();
         return t;
     }
 
-    public Task[] getTasks() {
-        Task[] taskArray = tasks.toArray(new Task[0]);
-        return taskArray;
+    public void deleteTask(){
+        tasks.remove();
+    }
+    public List<Task> getTasks() {
+        List<Task> taskList = new ArrayList<>();
+        for (Task t: tasks) {
+            taskList.add(t);
+        }
+        return taskList;
     }
 
     public AtomicInteger getWaitingPeriod() {
@@ -82,10 +78,18 @@ public class Server implements Runnable {
         this.waitingPeriod = waitingPeriod;
     }
 
+    public boolean isFinish() {
+        return finish;
+    }
+
+    public void setFinish(boolean finish) {
+        this.finish = finish;
+    }
+
     public int getNumberTasks() {
         int result=0;
-        Task[] taskArray= getTasks();
-        result=taskArray.length;
+        List<Task> taskArray= getTasks();
+        result=taskArray.size();
         return result;
     }
 
